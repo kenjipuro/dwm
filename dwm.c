@@ -193,6 +193,7 @@ static void resize(Client *c, int x, int y, int w, int h, int interact);
 static void resizeclient(Client *c, int x, int y, int w, int h);
 static void resizemouse(const Arg *arg);
 static void restack(Monitor *m);
+static void restart(const Arg *arg);
 static void run(void);
 static void scan(void);
 static int sendevent(Client *c, Atom proto);
@@ -1377,6 +1378,16 @@ restack(Monitor *m)
 	}
 	XSync(dpy, False);
 	while (XCheckMaskEvent(dpy, EnterWindowMask, &ev));
+}
+
+void
+restart(const Arg *arg)
+{
+	cleanup();
+	XCloseDisplay(dpy);
+
+	execlp("dwm", "dwm", NULL);
+	perror("execl");
 }
 
 void
