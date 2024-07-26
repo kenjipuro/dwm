@@ -100,6 +100,12 @@ static const Rule rules[] = {
 static const int showbar = 1;
 static const int topbar = 1;
 
+static const int showsystray = 1;
+static const unsigned int systrayonleft = 1;
+static const unsigned int systraypinning = 0;
+static const int systraypinningfailfirst = 1;
+static const unsigned int systrayspacing = 4;
+
 static const char sora_background[] = "#11111f";
 static const char sora_foreground[] = "#cbddfd";
 static const char sora_black[] = "#14151a";
