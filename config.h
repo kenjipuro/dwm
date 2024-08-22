@@ -84,9 +84,17 @@ static const Key keys[] = {
 #undef SET_TAG_KEY
 
 #define SPAWN(...) spawn, { .v = (const char*[]) { __VA_ARGS__, NULL } }
+#define SPAWN_LIB(command) \
+    SPAWN("sh", "-c", "\"${HOME}/.local/lib/dotfiles/" command "\"")
+#define SPAWN_LIB_ARGUMENTS(command, arguments) \
+    SPAWN("sh", "-c", "\"${HOME}/.local/lib/dotfiles/" command "\" " arguments)
     { MODIFIER, XK_d, spawn, { .v = dmenucmd } },
+    { MODIFIER, XK_p, SPAWN_LIB("type-pass") },
+    { MODIFIER | ShiftMask, XK_p, SPAWN_LIB_ARGUMENTS("type-pass", "otp") },
     { MODIFIER | ShiftMask, XK_Return, SPAWN("st") },
 #undef SPAWN
+#undef SPAWN_LIB
+#undef SPAWN_LIB_ARGUMENTS
 };
 
 static const float mfact = 0.55;
